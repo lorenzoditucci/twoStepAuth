@@ -9,6 +9,9 @@
     Name <input type='text' name='name' class='inputStyled'><br>
     Surname <input type='text' name='surname' class='inputStyled'><br>
     E-Mail <input type='text' name='mail' class='inputStyled'><br>
+    Secret Question: <input type = 'text' name='squest' class='inputStyled'><br>
+    Secret Answer : <input type="text" name="sansw" class="inputStyled"><br>
+
 
     <br><br>
 
