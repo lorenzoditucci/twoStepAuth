@@ -10,6 +10,7 @@
         <form action='login2.php' method='POST'>
             Username<input type='text' name='user' class='inputStyled' /><br>
             Password <input type='password' name='pass' class='inputStyled' /><br>
+            Token <input type='text' name='token' class='inputStyled' /> <br>
             <input type='submit' value='Login' class='inputButtonStyled' /><br><br>
         </form>
         <a href="register.php">Register</a><br><br>
