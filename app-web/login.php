@@ -13,6 +13,7 @@
             <input type='submit' value='Login' class='inputButtonStyled' /><br><br>
         </form>
         <a href="register.php">Register</a><br><br>
+        <a href="lostToken.php">Lost Token?</a><br><br>
     </div>
 
     <?php

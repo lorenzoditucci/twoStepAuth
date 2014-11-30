@@ -21,12 +21,12 @@ $user = addslashes($user);
 if($var['password'] == $hash){
     echo "<br>OK<br>";
 }else{
-    echo "data....<br>";
-    echo "<br>".$queryGet;
-    echo "<br> user...".$user."<br>";
-    echo "<br> password..".$password;
-    echo "<br> hashata..".$hash;
-    echo "<br> db -> ".$var['password'];
+    //echo "data....<br>";
+    //echo "<br>".$queryGet;
+    //echo "<br> user...".$user."<br>";
+    //echo "<br> password..".$password;
+    //echo "<br> hashata..".$hash;
+    //echo "<br> db -> ".$var['password'];
 
 }
 ?>
