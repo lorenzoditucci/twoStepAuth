@@ -21,6 +21,11 @@ $var = mysql_fetch_array($database);
 if($var['secretAnswer'] != $secretAnswer){
     echo "answer wrong";
     echo "<br><a href='login.php'>Come Back</a>";
+
+    //log data
+    $what = "newTokenReq - failed";
+    $description = "answer wrong for username ".$user." email: ".$email;
+    $when= time();
 }else{
 
 //if I am here, it is all right... go on
@@ -77,6 +82,16 @@ if($var['secretAnswer'] != $secretAnswer){
         echo "<br>Error sending the mail!";
     }else{
         echo "<br>confirmation sent, check the mailbox <a href='login.php'>Come Back</a>";
+
+        //log data
+        $what = "newTokenReq - ok";
+        $description = "reset ok for user ".$user;
+        $when= time();
     }
 }
+
+
+//store the log
+$queryLog = "INSERT INTO log (what, description, timestamp) VALUES ('".$what."', '".$description."', '".$when."')";
+$db = mysql_query($queryLog, $connection);
 

@@ -7,6 +7,11 @@ $token = $_POST['token'];
 
 if($user == '' || $password == '' || $token == ''){
     header('location:login.php');
+
+    //log data
+    $what = "login-failed";
+    $description = "empty fields";
+    $when= time();
 }
 
 $queryGet = 'SELECT name,surname,password FROM users WHERE username="'.$user.'"';
@@ -36,6 +41,11 @@ $saltDb = $tokenData['salt'];
 $now = time();
 if(($now - $timeDb) > 30){
     echo "token expired <a href='login.php'>Back</a>";
+
+    //log data
+    $what = "login-failed";
+    $description = "token expired - username: ".$user;
+    $when= time();
 }else{
     $tokenDb = hash('sha512',hash('sha512',$user).hash('sha512',$timeDb).hash('sha512',$saltDb));
     $tokenDb = substr($tokenDb,0,9);
@@ -44,7 +54,18 @@ if(($now - $timeDb) > 30){
 
     if($var['password'] == $hash && $valid['valid'] == 1 && $tokenDb == $token){
         echo "<br>OK<br>";
+
+        //log data
+        $what = "login-ok";
+        $description = "user: ".$user;
+        $when= time();
     }else{
+
+        //log data
+        $what = "login-failed";
+        $description = "user ".$user." valid : ".$valid;
+        $when= time();
+
         //header('location:login.php');
         //echo "data....<br>";
         //echo "<br>".$queryGet;
@@ -57,6 +78,10 @@ if(($now - $timeDb) > 30){
 
     }
 }
+
+//store the log
+$queryLog = "INSERT INTO log (what, description, timestamp) VALUES ('".$what."', '".$description."', '".$when."')";
+$db = mysql_query($queryLog, $connection);
 
 
 ?>

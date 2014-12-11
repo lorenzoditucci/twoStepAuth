@@ -28,13 +28,23 @@ if(isset($_POST['user']) && isset($_POST['email'])){
     $var = mysql_fetch_array($db);
     if(!$var){
         echo "error - <a href='login.php'>Come Back!</a>";
+
+        //log data
+        $what = "newTokenReq - failed";
+        $description = "user ".$_POST['user']." && email ".$_POST['email'];
+        $when= time();
+
+        //store the log
+        $queryLog = "INSERT INTO log (what, description, timestamp) VALUES ('".$what."', '".$description."', '".$when."')";
+        $db = mysql_query($queryLog, $connection);
+
     }else{
         $_SESSION['user'] = $_POST['user'];
         $_SESSION['email'] = $_POST['email'];
         //ask for the secret question
         echo "<div align = 'center'>
             <form action='reset.php' method='POST'>
-                ".$var['secretQuestion']." <input type = 'text' name = 'secretAnswer' class='inputStyled' /><br>
+                Question : ".$var['secretQuestion']." <input type = 'text' name = 'secretAnswer' class='inputStyled' /><br>
             </form>
             </div>";
     }
